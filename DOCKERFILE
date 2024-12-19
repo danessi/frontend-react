@@ -1,0 +1,27 @@
+# Usar una imagen oficial de Node.js
+FROM node:18-alpine
+
+# Instalar bash
+RUN apk add --no-cache bash
+
+# Configurar el directorio de trabajo
+WORKDIR /usr/src/app
+
+# Copiar los archivos del proyecto
+COPY package*.json ./
+
+# Instalar las dependencias
+RUN npm install
+
+# Instala web-vitals como dependencia
+#RUN npm install web-vitals
+
+# Copiar el resto del código fuente
+COPY . .
+
+# Exponer el puerto
+EXPOSE 3000
+
+# Ejecutar la aplicación
+CMD ["npm", "run", "dev"]
+#CMD ["npm", "start"]
